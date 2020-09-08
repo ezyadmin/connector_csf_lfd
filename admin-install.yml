@@ -2,47 +2,43 @@
 - name: EzyAdmin install csf lfd
   hosts: all
   tasks:
-  - name: Hostname a variable
-    debug: var=inventory_hostname
+   - name: Hostname a variable
+     debug: var=inventory_hostname
 
-  - name: Download file csf.tgz
-    copy:
-     src: csf.tgz
-     dest: /usr/src
-     owner: root
-     group: root
-     mode: 0644
-    become: True
+   - name: Download file csf.tar 
+     get_url:
+      url: https://download.configserver.com/csf.tgz
+      dest: /usr/src/csf.tgz
+      force_basic_auth: yes
+
+   - name: tar file
+     shell: tar zxvf /usr/src/csf.tgz -C /usr/src/
+     become: True
     
-  - name: tar file
-    shell: tar zxvf /usr/src/csf.tgz -C /usr/src/
-    become: True
-    
-  - name: Install CSF
-    shell: bash /usr/src/csf/install.sh
-    args:
-     chdir: /usr/src/csf
-     creates: /usr/sbin/csf
-    become: True
-    
-  - lineinfile:
+   - name: Install CSF
+     shell: bash /usr/src/csf/install.sh
+     args:
+      chdir: /usr/src/csf
+      creates: /usr/sbin/csf
+   
+   - lineinfile:
       path: /etc/csf/csf.conf
       regexp: '^TESTING ='
       line: 'TESTING = "0"'
-    become: True
+     become: True
 
-  - lineinfile:
+   - lineinfile:
       path: /etc/csf/csf.conf
       regexp: '^RESTRICT_SYSLOG ='
       line: 'RESTRICT_SYSLOG = "3"'
-    become: True
+     become: True
 
-  - name: restart csf
-    command: csf -r
-    become: True
+   - name: restart csf
+     command: csf -r
+     become: True
 
-  - name: restart service lfd
-    service:
+   - name: restart service lfd
+     service:
       name: lfd
       state: restarted
-    become: True
+     become: True

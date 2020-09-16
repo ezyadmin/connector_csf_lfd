@@ -21,6 +21,7 @@
      args:
       chdir: /usr/src/csf
       creates: /usr/sbin/csf
+     become: True
    
    - lineinfile:
       path: /etc/csf/csf.conf

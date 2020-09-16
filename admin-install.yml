@@ -10,6 +10,7 @@
       url: https://download.configserver.com/csf.tgz
       dest: /usr/src/csf.tgz
       force_basic_auth: yes
+     become: True
 
    - name: tar file
      shell: tar zxvf /usr/src/csf.tgz -C /usr/src/

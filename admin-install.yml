@@ -22,6 +22,7 @@
       chdir: /usr/src/csf
       creates: /usr/sbin/csf
      become: True
+     ignore_errors: yes
    
    - lineinfile:
       path: /etc/csf/csf.conf

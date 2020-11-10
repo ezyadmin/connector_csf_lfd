@@ -39,6 +39,7 @@
    - name: restart csf
      command: csf -r
      become: True
+     ignore_errors: yes
 
    - name: restart service lfd
      service:

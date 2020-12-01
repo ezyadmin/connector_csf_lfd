@@ -21,6 +21,7 @@
      args:
       chdir: /usr/src/csf
       creates: /usr/sbin/csf
+     register: command_install
      become: True
      ignore_errors: yes
    
@@ -38,6 +39,7 @@
 
    - name: restart csf
      command: csf -r
+     register: command_restart
      become: True
      ignore_errors: yes
 

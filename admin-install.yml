@@ -7,7 +7,7 @@
 
    - name: Download file csf.tar 
      get_url:
-      url: https://download.configserver.com/csf.tgz
+      url: http://download.configserver.com/csf.tgz
       dest: /usr/src/csf.tgz
       force_basic_auth: yes
      become: True

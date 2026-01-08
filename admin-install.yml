@@ -7,8 +7,8 @@
 
    - name: Download file csf.tar 
      get_url:
-      url: https://github.com/waytotheweb/scripts/raw/refs/heads/main/csf.tgz
-      # url: http://download.configserver.com/csf.tgz
+      # url: https://github.com/waytotheweb/scripts/raw/refs/heads/main/csf.tgz
+      url: https://download.configserver.dev/csf.tgz
       dest: /usr/src/csf.tgz
       force_basic_auth: yes
      become: True
